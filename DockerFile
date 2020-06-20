@@ -1,0 +1,7 @@
+FROM azul/zulu-openjdk:8
+#RUN addgroup -S spring && adduser -S spring -G spring
+RUN groupadd -r spring && useradd -r spring -g spring
+USER spring:spring
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar","/app.jar"]

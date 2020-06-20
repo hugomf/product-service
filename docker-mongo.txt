@@ -1,0 +1,11 @@
+
+#App in docker
+
+ docker run -p 8080:8080 --name prod-serv product-service
+
+//with custom network
+ docker run -p 8080:8080 --name prod-serv --network az_subnet product-service-image
+
+#Mongo in Docker
+
+docker run -d -p 27017-27019:27017-27019 -v /mongodata:/data/db --name mongodb mongo

@@ -1,0 +1,7 @@
+---
+applications:
+- name: NaturaProductService
+  memory: 1GB
+  path: ./build/libs/product-service-0.0.1-SNAPSHOT.jar
+  env:
+    SPRING_PROFILES_ACTIVE: prod

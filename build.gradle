@@ -1,0 +1,48 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id 'com.bmuschko.docker-spring-boot-application' version '6.4.0'
+}
+
+group = 'org.aztekcoder.ecommerce'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.google.guava:guava:28.0-jre'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+//    testImplementation("junit:junit:4.13"){
+//        exclude group: 'org.hamcrest'
+//    }
+    testImplementation 'org.hamcrest:hamcrest-library:1.3'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
+}
+
+docker {
+    springBootApplication {
+        baseImage = 'openjdk:8-alpine'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
