@@ -2,12 +2,9 @@ package org.aztekcoder.ecommerce.productservice;
 
 
 import com.google.common.collect.Lists;
-import org.aztekcoder.ecommerce.productservice.controller.ProductIds;
-import org.aztekcoder.ecommerce.productservice.controller.Products;
 import org.aztekcoder.ecommerce.productservice.entity.Category;
 import org.aztekcoder.ecommerce.productservice.entity.Product;
 import org.aztekcoder.ecommerce.productservice.entity.ProductVariant;
-import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +13,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -37,7 +33,6 @@ public class ProductApplicationTest {
 
    // @Value("${product.service.url}")
     String hostUrl;
-
 
     @LocalServerPort
     private int port;
