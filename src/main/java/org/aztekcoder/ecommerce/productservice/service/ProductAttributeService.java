@@ -11,16 +11,15 @@ import java.util.List;
 @Service
 public class ProductAttributeService {
 
-    private ProductAttributeRepository repo;
-
+    private ProductAttributeRepository repository;
 
     @Autowired
-    public ProductAttributeService(ProductAttributeRepository repo) {
-        this.repo = repo;
+    public ProductAttributeService(ProductAttributeRepository repository) {
+        this.repository = repository;
     }
 
     public List<ProductAttribute> fetchAttributesByGroup(String productGroup) throws EntityNotFoundException {
-        return this.repo.
+        return this.repository.
                 findByProductGroup(productGroup).
                 orElseThrow(()-> new EntityNotFoundException("productGroup:" + productGroup));
     }
