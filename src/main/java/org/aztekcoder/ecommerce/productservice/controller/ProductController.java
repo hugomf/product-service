@@ -24,6 +24,12 @@ public class ProductController {
         this.prodservice = prodservice;
     }
 
+
+    @GetMapping("/")
+    public ResponseEntity<String> ok() {
+        return ResponseEntity.ok("Ok");
+    }
+
     @PostMapping(path = "/product", consumes = "application/json", produces="application/json")
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         try {
