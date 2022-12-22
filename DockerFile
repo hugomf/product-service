@@ -1,7 +1,21 @@
-FROM azul/zulu-openjdk:8
-#RUN addgroup -S spring && adduser -S spring -G spring
-RUN groupadd -r spring && useradd -r spring -g spring
-USER spring:spring
-ARG JAR_FILE=build/libs/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar","/app.jar"]
+# FROM azul/zulu-openjdk:8
+# #RUN addgroup -S spring && adduser -S spring -G spring
+# RUN groupadd -r spring && useradd -r spring -g spring
+# USER spring:spring
+# ARG JAR_FILE=build/libs/*.jar
+# COPY ${JAR_FILE} app.jar
+# ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar","/app.jar"]
+
+
+# Use the openjdk image as the base for the first stage
+FROM openjdk:8-jdk-alpine as build
+WORKDIR /app
+COPY . .
+RUN ./gradlew build
+
+
+FROM openjdk:8-jre-alpine
+WORKDIR /app
+COPY --from=build /app/build/libs/*.jar /app/myapp.jar
+#CMD ["java", "-jar", "myapp.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar","/app/myapp.jar"]

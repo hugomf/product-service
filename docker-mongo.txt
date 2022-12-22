@@ -1,6 +1,8 @@
 #Build image
 
-docker build --build-arg JAR_FILE=build/libs/\*.jar -t spring-boot-docker:latest
+docker build -t spring-boot-app .
+
+docker build --build-arg JAR_FILE=build/libs/product-service-0.0.1-SNAPSHOT.jar -t spring-boot-docker:latest
 
 #App in docker
 
