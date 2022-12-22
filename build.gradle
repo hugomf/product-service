@@ -36,11 +36,6 @@ dependencies {
 
 }
 
-docker {
-    springBootApplication {
-        baseImage = 'openjdk:8-alpine'
-    }
-}
 
 test {
     useJUnitPlatform()

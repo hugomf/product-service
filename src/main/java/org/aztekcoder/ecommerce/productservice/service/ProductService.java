@@ -44,7 +44,7 @@ public class ProductService {
     }
 
     public Page<Product> getProducts(Integer pageNo, Integer pageSize, String sortBy, Integer asc) {
-        Sort.Direction currentDir = (asc==1) ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Sort.Direction currentDir = (asc==-1) ? Sort.Direction.ASC : Sort.Direction.DESC;
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(currentDir, sortBy));
         return this.prodRepo.findAll(paging);
     }

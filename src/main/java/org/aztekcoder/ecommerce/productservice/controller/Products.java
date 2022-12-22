@@ -11,9 +11,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Products {
-    private List<Product> data;
-    private int total;
+    private List<Product> items;
+    private int rows;
     private int totalPages;
-    private long totalElements;
+    private long totalRecords;
     private int page;
 }

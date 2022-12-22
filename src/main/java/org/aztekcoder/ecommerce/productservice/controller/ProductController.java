@@ -72,12 +72,12 @@ public class ProductController {
     }
 
     @GetMapping(value = "/product", produces = "application/json")
-    public ResponseEntity<Object>  getProduct( @RequestParam(defaultValue = "1") Integer page,
-                                               @RequestParam(defaultValue = "10") Integer limit,
-                                               @RequestParam(defaultValue = "0") Integer ascending,
-                                               @RequestParam(defaultValue = "id") String orderBy) {
+    public ResponseEntity<Object>  getProduct( @RequestParam(defaultValue = "0") Integer page,
+                                               @RequestParam(defaultValue = "10") Integer pageSize,
+                                               @RequestParam(defaultValue = "id") String sortField,
+                                               @RequestParam(defaultValue = "0") Integer sortOrder) {
         try {
-            Page<Product> data = this.prodservice.getProducts(page - 1, limit, orderBy, ascending);
+            Page<Product> data = this.prodservice.getProducts(page, pageSize, sortField, sortOrder);
             //log.debug("*******Data:{}", data);
             return ResponseEntity.ok().body(new Products(data.getContent(),
                     data.getContent().size(), data.getTotalPages(), data.getTotalElements(), page));
