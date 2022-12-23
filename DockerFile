@@ -8,14 +8,14 @@
 
 
 # Use the openjdk image as the base for the first stage
-FROM openjdk:8-jdk-alpine as build
+FROM gradle:jdk8 AS build
+COPY . /app
 WORKDIR /app
-COPY . .
-RUN ./gradlew build
-
+RUN gradle build --no-daemon
 
 FROM openjdk:8-jre-alpine
 WORKDIR /app
-COPY --from=build /app/build/libs/*.jar /app/myapp.jar
+RUN addgroup -S spring && adduser -S spring -G spring 
+COPY --from=build /app/build/libs/*.jar /app/app.jar
 #CMD ["java", "-jar", "myapp.jar"]
-ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar","/app/myapp.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar","/app/app.jar"]
