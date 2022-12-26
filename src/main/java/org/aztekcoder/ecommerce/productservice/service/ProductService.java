@@ -2,9 +2,8 @@ package org.aztekcoder.ecommerce.productservice.service;
 
 import org.aztekcoder.ecommerce.productservice.EntityNotFoundException;
 import org.aztekcoder.ecommerce.productservice.controller.ProductIds;
-import org.aztekcoder.ecommerce.productservice.dao.ProductRepository;
 import org.aztekcoder.ecommerce.productservice.entity.Product;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.aztekcoder.ecommerce.productservice.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +15,6 @@ public class ProductService {
 
     private ProductRepository prodRepo;
 
-    @Autowired
     public ProductService(ProductRepository prodRepo) {
         this.prodRepo = prodRepo;
     }

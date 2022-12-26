@@ -59,9 +59,9 @@ public class ProductApplicationTest {
                 new ProductVariant("ColorType","Color","Green"));
 
         List<Category> categories = Lists.newArrayList(
-            new Category("Books", null),
-            new Category("Magazines", null),
-            new Category("Publications", null)
+            new Category("Books", null, null, ""),
+            new Category("Magazines", null, null, ""),
+            new Category("Publications", null, null, "")
         );
 
         Product product = new Product("test1", attrs, categories);

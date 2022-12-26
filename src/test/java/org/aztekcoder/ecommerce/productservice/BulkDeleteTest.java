@@ -123,7 +123,7 @@ public class BulkDeleteTest {
         // delete all the previously created products
         System.out.println("productsIds:" + productIds);
         HttpEntity<ProductIds> requestEntity = new HttpEntity<ProductIds>(productIds);
-        ResponseEntity resp = restTemplate.exchange(uri, HttpMethod.DELETE, requestEntity, ProductIds.class);
+        ResponseEntity<?> resp = restTemplate.exchange(uri, HttpMethod.DELETE, requestEntity, ProductIds.class);
         assertEquals(201, result.getStatusCodeValue());
 
 

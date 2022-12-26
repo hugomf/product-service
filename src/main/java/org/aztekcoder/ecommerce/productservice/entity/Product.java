@@ -22,14 +22,14 @@ public class Product {
 
     @Indexed(unique=true)
     private String sku;
-
     private String title;
 
     private String imagePath;
 
     private String description;
 
-    private BigDecimal basePrice;
+    @Field("price")
+    private Price price;
 
     @Field("attrs")
     private List<ProductAttribute> attrs;

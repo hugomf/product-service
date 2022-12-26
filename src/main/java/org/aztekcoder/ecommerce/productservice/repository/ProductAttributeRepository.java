@@ -1,4 +1,4 @@
-package org.aztekcoder.ecommerce.productservice.dao;
+package org.aztekcoder.ecommerce.productservice.repository;
 
 import org.aztekcoder.ecommerce.productservice.entity.ProductAttribute;
 import org.springframework.data.mongodb.repository.MongoRepository;
