@@ -1,10 +1,9 @@
 package org.aztekcoder.ecommerce.productservice.entity;
 
+import java.math.BigDecimal;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor

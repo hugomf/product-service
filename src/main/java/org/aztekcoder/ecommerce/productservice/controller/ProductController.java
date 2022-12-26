@@ -3,7 +3,6 @@ package org.aztekcoder.ecommerce.productservice.controller;
 import org.aztekcoder.ecommerce.productservice.EntityNotFoundException;
 import org.aztekcoder.ecommerce.productservice.entity.Product;
 import org.aztekcoder.ecommerce.productservice.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,6 @@ public class ProductController {
 
     private ProductService prodservice;
 
-    @Autowired
     public ProductController(ProductService prodservice) {
         this.prodservice = prodservice;
     }

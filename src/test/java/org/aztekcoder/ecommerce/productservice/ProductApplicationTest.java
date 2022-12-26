@@ -7,8 +7,8 @@ import org.aztekcoder.ecommerce.productservice.entity.Product;
 import org.aztekcoder.ecommerce.productservice.entity.ProductVariant;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -34,7 +34,7 @@ public class ProductApplicationTest {
    // @Value("${product.service.url}")
     String hostUrl;
 
-    @LocalServerPort
+    @Value("${local.server.port}")
     private int port;
 
     private String addedProductId;
@@ -97,7 +97,7 @@ public class ProductApplicationTest {
         URI uri = new URI(baseUrl);
 
         Assertions.assertThrows(RestClientException.class, ()-> {
-            ResponseEntity<String> result = restTemplate.getForEntity(uri + "/22", String.class);
+           restTemplate.getForEntity(uri + "/22", String.class);
         });
 
     }

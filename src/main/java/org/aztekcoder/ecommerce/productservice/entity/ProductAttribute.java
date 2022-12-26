@@ -1,10 +1,11 @@
 package org.aztekcoder.ecommerce.productservice.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceCreator;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +21,7 @@ public class ProductAttribute {
 
     private ProductGroup productGroup;
 
-    @PersistenceConstructor
+    @PersistenceCreator
     public ProductAttribute(String name, String value, ProductGroup productGroup) {
         this.name = name;
         this.value = value;

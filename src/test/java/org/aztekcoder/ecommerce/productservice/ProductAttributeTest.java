@@ -6,8 +6,8 @@ import org.aztekcoder.ecommerce.productservice.entity.ProductAttribute;
 import org.aztekcoder.ecommerce.productservice.entity.ProductGroup;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Disabled
 public class ProductAttributeTest {
 
-    @LocalServerPort
+    @Value("${local.server.port}")
     int randomServerPort;
 
     private String addedProductAttr;
@@ -74,7 +74,7 @@ public class ProductAttributeTest {
         URI uri = new URI(baseUrl);
 
         Assertions.assertThrows(RestClientException.class, ()-> {
-            ResponseEntity<String> result = restTemplate.getForEntity(uri + "/22", String.class);
+            restTemplate.getForEntity(uri + "/22", String.class);
         });
 
         //assertThat(result.getStatusCode(), equalTo(HttpStatus.NOT_FOUND));

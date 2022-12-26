@@ -1,16 +1,16 @@
 package org.aztekcoder.ecommerce.productservice.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.math.BigDecimal;
-import java.util.List;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -47,7 +47,7 @@ public class Product {
     @Field("__v")
     private Long version;
 
-    @PersistenceConstructor
+    @PersistenceCreator
     public Product(String sku, String title, List<ProductVariant> variants, List<Category> categories) {
         this.sku = sku;
         this.title =  title;
@@ -55,7 +55,7 @@ public class Product {
         this.categories = categories;
     }
 
-    @PersistenceConstructor
+    @PersistenceCreator
     public Product(String title, List<ProductVariant> variants, List<Category> categories) {
         this(null, title, variants, categories);
     }
