@@ -1,13 +1,33 @@
+
+
+// buildscript {
+    
+//     repositories {
+//         mavenLocal()
+//         jcenter()
+//      }
+
+//     dependencies {
+//         classpath 'org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:latest.integration'
+//     }
+// }
+
 plugins {
     id 'org.springframework.boot' version '2.7.7'
     id 'io.spring.dependency-management' version '1.1.0'
     id 'java'
 }
 
+//  apply plugin: 'jsonschema2pojo'
+
+
 group = 'org.aztekcoder.ecommerce'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+
+java {
+    sourceCompatibility = "VERSION_1_8"
+    targetCompatibility = "VERSION_1_8"
+}
 
 configurations {
     compileOnly {
@@ -25,6 +45,7 @@ dependencies {
     implementation 'com.google.guava:guava:28.0-jre'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
     annotationProcessor 'org.projectlombok:lombok'
 
 
@@ -39,3 +60,10 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+// jsonSchema2Pojo {
+//     source = files("${sourceSets.main.output.resourcesDir}/schemas")
+//     targetDirectory = file("${project.buildDir}/generated-sources/entities")
+//     targetPackage = 'org.aztekcoder.ecommerce.productservice.entity'
+//     annotationStyle = 'none'
+// }

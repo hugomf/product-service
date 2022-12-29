@@ -3,6 +3,7 @@ package org.aztekcoder.ecommerce.productservice.service;
 import org.aztekcoder.ecommerce.productservice.EntityNotFoundException;
 import org.aztekcoder.ecommerce.productservice.controller.ProductIds;
 import org.aztekcoder.ecommerce.productservice.entity.Product;
+import org.aztekcoder.ecommerce.productservice.repository.CrudProductRepository;
 import org.aztekcoder.ecommerce.productservice.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,24 +16,34 @@ public class ProductService {
 
     private ProductRepository prodRepo;
 
-    public ProductService(ProductRepository prodRepo) {
+    private CrudProductRepository crudRepo;
+
+    public ProductService(ProductRepository prodRepo, CrudProductRepository crudRepo) {
         this.prodRepo = prodRepo;
+        this.crudRepo = crudRepo;
     }
 
     public Product saveProduct(Product product) {
-        return this.prodRepo.save(product);
+        return this.crudRepo.save(product);
     }
 
     public void updateProduct(String id, Product product)  throws  Exception  {
         Product oldProduct = getProduct(id);
-        Product newProduct = populateProduct(oldProduct, product);
-        this.prodRepo.save(newProduct);
+        mapProduct(oldProduct, product);
+        this.crudRepo.save(oldProduct);
     }
 
-    private Product populateProduct(Product oldProduct, Product product) {
-        oldProduct.setTitle(oldProduct.getTitle());
-        oldProduct.setVariants(oldProduct.getVariants());
-        return oldProduct;
+    private void mapProduct(Product oldProduct, Product product) {
+        oldProduct.setTitle(product.getTitle());
+        oldProduct.setSku(product.getSku());
+        oldProduct.setDescription(product.getDescription());
+        oldProduct.setImagePath(product.getImagePath());
+        oldProduct.setRating(product.getRating());
+        oldProduct.setPrice(product.getPrice());
+        oldProduct.setInventory(product.getInventory());
+        oldProduct.setCategories(product.getCategories());
+        oldProduct.setAttrs(product.getAttrs());
+        oldProduct.setVariants(product.getVariants());
     }
 
     public Product getProduct(String id) throws  Exception {

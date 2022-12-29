@@ -43,7 +43,7 @@ public class ProductController {
     }
 
     @PutMapping(path = "/product/{id}", consumes = "application/json", produces="application/json")
-    public ResponseEntity<Object> patchProduct(@PathVariable("id") String id, @RequestBody Product product) {
+    public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product) {
         try {
             this.prodservice.updateProduct(id, product);
             URI location = ServletUriComponentsBuilder.fromCurrentRequest()

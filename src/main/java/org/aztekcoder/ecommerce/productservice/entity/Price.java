@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Price {
+    
     private BigDecimal basePrice;
+    
     private String currency;
 }
