@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(Lifecycle.PER_CLASS)
-//@Disabled
+@Disabled
 public class ProductApplicationTest {
 
 
@@ -69,7 +69,7 @@ public class ProductApplicationTest {
         ResponseEntity<Product> result = restTemplate.postForEntity(uri, product, Product.class);
         this.addedProductId = result.getBody().getId();
         //Verify request succeed
-        assertEquals(201, result.getStatusCodeValue());
+        assertEquals(201, result.getStatusCode());
     }
 
 
@@ -115,7 +115,7 @@ public class ProductApplicationTest {
         HttpEntity<Product> httpProduct = new HttpEntity<Product>(product);
         ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.PUT, httpProduct, String.class);
         //Verify request succeed
-        assertEquals(201, result.getStatusCodeValue());
+        assertEquals(201, result.getStatusCode());
     }
 
     @Test

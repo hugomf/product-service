@@ -3,7 +3,6 @@ package org.aztekcoder.ecommerce.productservice.service;
 import org.aztekcoder.ecommerce.productservice.EntityNotFoundException;
 import org.aztekcoder.ecommerce.productservice.controller.ProductIds;
 import org.aztekcoder.ecommerce.productservice.entity.Product;
-import org.aztekcoder.ecommerce.productservice.repository.CrudProductRepository;
 import org.aztekcoder.ecommerce.productservice.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,21 +15,19 @@ public class ProductService {
 
     private ProductRepository prodRepo;
 
-    private CrudProductRepository crudRepo;
 
-    public ProductService(ProductRepository prodRepo, CrudProductRepository crudRepo) {
+    public ProductService(ProductRepository prodRepo) {
         this.prodRepo = prodRepo;
-        this.crudRepo = crudRepo;
     }
 
     public Product saveProduct(Product product) {
-        return this.crudRepo.save(product);
+        return this.prodRepo.save(product);
     }
 
     public void updateProduct(String id, Product product)  throws  Exception  {
         Product oldProduct = getProduct(id);
         mapProduct(oldProduct, product);
-        this.crudRepo.save(oldProduct);
+        this.prodRepo.save(oldProduct);
     }
 
     private void mapProduct(Product oldProduct, Product product) {

@@ -48,7 +48,7 @@ public class ProductAttributeTest {
         ResponseEntity<ProductAttribute> result = restTemplate.postForEntity(uri, attr, ProductAttribute.class);
         this.addedProductAttr = result.getBody().getId();
         //Verify request succeed
-        assertEquals(201, result.getStatusCodeValue());
+        assertEquals(201, result.getStatusCode());
     }
 
 
@@ -92,6 +92,6 @@ public class ProductAttributeTest {
         HttpEntity<Product> httpProduct = new HttpEntity<Product>(product);
         ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.PUT, httpProduct, String.class);
         //Verify request succeed
-        assertEquals(201, result.getStatusCodeValue());
+        assertEquals(201, result.getStatusCode());
     }
 }
