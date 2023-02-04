@@ -1,15 +1,15 @@
 # **Product Service**
 
-## **Descritpion**
+## **Description:**
 
 Loads and retreives products, fetch a list of products using pagination.
 
-## **Features**
+## **Features:**
 
 - CRUD Operations for Product
+- Fetch a list of products using pagination and sorting
 
-
-## **Usage**
+## **Usage:**
 
 Make sure you have Java SDKv17 installed in your PATH:
 
