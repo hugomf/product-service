@@ -1,5 +1,6 @@
 package org.aztekcoder.ecommerce.productservice.service;
 
+import org.apache.logging.log4j.util.Strings;
 import org.aztekcoder.ecommerce.productservice.EntityNotFoundException;
 import org.aztekcoder.ecommerce.productservice.controller.ProductIds;
 import org.aztekcoder.ecommerce.productservice.entity.Product;
@@ -49,10 +50,14 @@ public class ProductService {
                 orElseThrow(()-> new EntityNotFoundException("id:" + id));
     }
 
-    public Page<Product> getProducts(Integer pageNo, Integer pageSize, String sortBy, Integer asc) {
+    public Page<Product> getProducts(String filter, Integer pageNo, Integer pageSize, String sortBy, Integer asc) {
         Sort.Direction currentDir = (asc==-1) ? Sort.Direction.ASC : Sort.Direction.DESC;
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(currentDir, sortBy));
-        return this.prodRepo.findAll(paging);
+        if (Strings.isBlank(filter)) {
+            return this.prodRepo.findAll(paging);
+        }
+        return this.prodRepo.findByTitleLikeAndDescriptionLike(filter, filter, paging);
+  
     }
 
     public void deleteProduct(String productId) throws  Exception {

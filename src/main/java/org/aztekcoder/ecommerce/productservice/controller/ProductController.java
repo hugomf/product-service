@@ -72,9 +72,10 @@ public class ProductController {
     public ResponseEntity<Object>  getProduct( @RequestParam(defaultValue = "0") Integer page,
                                                @RequestParam(defaultValue = "10") Integer pageSize,
                                                @RequestParam(defaultValue = "id") String sortField,
-                                               @RequestParam(defaultValue = "0") Integer sortOrder) {
+                                               @RequestParam(defaultValue = "0") Integer sortOrder,
+                                               @RequestParam(defaultValue = "") String filter) {
         try {
-            Page<Product> data = this.service.getProducts(page, pageSize, sortField, sortOrder);
+            Page<Product> data = this.service.getProducts(filter, page, pageSize, sortField, sortOrder);
             //log.debug("*******Data:{}", data);
             return ResponseEntity.ok().body(new Products(data.getContent(),
                     data.getContent().size(), data.getTotalPages(), data.getTotalElements(), page));
