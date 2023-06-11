@@ -8,14 +8,44 @@
 
 
 # Use the openjdk image as the base for the first stage
-FROM gradle:jdk8 AS build
+# FROM gradle:jdk8 AS build
+# COPY . /app
+# WORKDIR /app
+# RUN gradle build --no-daemon
+
+# FROM openjdk:8-jre-alpine
+# WORKDIR /app
+# RUN addgroup -S spring && adduser -S spring -G spring 
+# COPY --from=build /app/build/libs/*.jar /app/app.jar
+# ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar","/app/app.jar"]
+
+
+# Stage 1: Build the application
+FROM gradle:jdk17 AS builder
 COPY . /app
 WORKDIR /app
 RUN gradle build --no-daemon
 
-FROM openjdk:8-jre-alpine
+# Stage 2: Create the application image
+FROM eclipse-temurin:17 as jre-build
+
+# Create a custom Java runtime
+RUN $JAVA_HOME/bin/jlink \
+         --add-modules java.xml,java.sql,java.prefs,java.desktop,java.base,java.management,java.naming,java.security.jgss,java.instrument,jdk.naming.dns,jdk.crypto.ec \
+         --strip-debug \
+         --no-man-pages \
+         --no-header-files \
+         --compress=2 \
+         --output /javaruntime
+# Define your base image
+FROM debian:buster-slim
+ENV JAVA_HOME=/opt/java/openjdk
+ENV PATH "${JAVA_HOME}/bin:${PATH}"
+COPY --from=jre-build /javaruntime $JAVA_HOME
+
+# Continue with your application deployment
 WORKDIR /app
-RUN addgroup -S spring && adduser -S spring -G spring 
-COPY --from=build /app/build/libs/*.jar /app/app.jar
-#CMD ["java", "-jar", "myapp.jar"]
+#RUN addgroup -S spring && adduser -S spring -G spring 
+COPY --from=builder /app/build/libs/*.jar /app/app.jar
+# Set the entry point for the container
 ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar","/app/app.jar"]
